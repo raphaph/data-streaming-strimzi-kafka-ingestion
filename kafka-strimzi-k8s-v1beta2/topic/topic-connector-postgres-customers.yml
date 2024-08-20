@@ -10,9 +10,9 @@ spec:
   class: io.confluent.connect.jdbc.JdbcSourceConnector
   tasksMax: 2
   config:
-    connection.url: "jdbc:postgresql://postgres-kafka.cf8gwg2i2nop.us-east-1.rds.amazonaws.com:5432/postgres" # connection string do banco
+    connection.url: "jdbc:postgresql://postgres:5432/db" # connection string do banco
     connection.user: "postgres"
-    connection.password: "mantis0090a"
+    connection.password: ""
     connection.attempts: "3" # tentativas de conexão
     table.whitelist: "customers"
     mode: incrementing

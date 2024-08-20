@@ -12,8 +12,8 @@ spec:
     topics.dir: "landing-zone/kafka_events"
     s3.bucket.name: "kafka-sink-connector" # criado especificamente para o aprendizado
     s3.region: us-east-1
-    aws.access.key.id: "AKIAWHMQZWYECG3KXA73" # inserir sua access key
-    aws.secret.access.key: "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" # inserir sua secret key
+    aws.access.key.id: "" # inserir sua access key
+    aws.secret.access.key: "" # inserir sua secret key
     connector.class: "io.confluent.connect.s3.S3SinkConnector"
     storage.class: "io.confluent.connect.s3.storage.S3Storage"  
     consumer.auto.offset.reset: latest
