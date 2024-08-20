@@ -1,4 +1,4 @@
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 428189791752.dkr.ecr.us-east-1.amazonaws.com
+aws ecr get-login-password --region us-east-1 --profile raphawb | docker login --username AWS --password-stdin 428189791752.dkr.ecr.us-east-1.amazonaws.com
 
 docker build -t kafka-k8s-repository .
 
