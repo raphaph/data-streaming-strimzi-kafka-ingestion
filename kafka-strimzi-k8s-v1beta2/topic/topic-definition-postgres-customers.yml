@@ -1,0 +1,14 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: ingest-src-postgresql-customers
+  namespace: ingestion
+  labels:
+    strimzi.io/cluster: kafkabroker  # Nome do cluster Kafka ao qual este tópico pertence
+spec:
+  partitions: 2                      # Número de partições que o tópico terá
+  replicas: 2                        # Número de réplicas para o tópico
+  config:                            # Configurações específicas do tópico
+    retention.ms: 604800000          # Tempo de retenção em milissegundos (1 semana)
+    segment.bytes: 1073741824        # Tamanho máximo do segmento (1 GB)
+    cleanup.policy: delete           # Política de limpeza (ex.: 'compact' para compactação)

@@ -1,0 +1,36 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector # Conector para deploy de tópico
+metadata:
+  name: "ingest-src-postgresql-customers-json-3200e849928721" # [ingestao-source-postgres-table-tipagem-uuid]
+  labels:
+    # kafka connect [cluster] name
+    strimzi.io/cluster: kafkabroker # mesmo nome dado ao broker
+spec:
+
+  config:
+    # configurações padrões para formatar em json
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    key.converter.schemas.enable: true
+    value.converter.schemas.enable: true
+    # conexão com o banco
+    connection.url: "jdbc:postgresql://postgres-kafka.cf8gwg2i2nop.us-east-1.rds.amazonaws.com:5432/postgres" # connection string do banco
+    connection.user: "postgres"
+    connection.password: "mantis0090a"
+    connection.attempts: "3" # tentativas de conexão
+    query: "SELECT * FROM public.customers" # query para importação da tabela
+    mode: "incrementing" # modo de carga
+    topic.prefix: "src-postgres-customers-json" # nome do topico
+    incrementing.column.name: "id" # coluna para incrementalidade, key unica
+    validate.non.null: "false"
+    # configurações padrão
+    transforms: "createKey,extractInt,InsertTopic,InsertSourceDetails"
+    transforms.createKey.type: "org.apache.kafka.connect.transforms.ValueToKey"
+    transforms.createKey.fields: "id"
+    transforms.extractInt.type: "org.apache.kafka.connect.transforms.ExtractField$Key"
+    transforms.extractInt.field: "id"
+    transforms.InsertTopic.type: "org.apache.kafka.connect.transforms.InsertField$Value"
+    transforms.InsertTopic.topic.field: "messagetopic"
+    transforms.InsertSourceDetails.type: "org.apache.kafka.connect.transforms.InsertField$Value"
+    transforms.InsertSourceDetails.static.field: "messagesource" # tipo da mensagem
+    transforms.InsertSourceDetails.static.value: "postgresql" # origem da mensagem

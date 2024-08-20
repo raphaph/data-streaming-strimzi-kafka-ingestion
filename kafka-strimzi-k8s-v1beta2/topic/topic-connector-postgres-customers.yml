@@ -1,0 +1,27 @@
+# source
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: postgres-source-connector-customers
+  namespace: ingestion
+  labels:
+    strimzi.io/cluster: kafkabroker
+spec:
+  class: io.confluent.connect.jdbc.JdbcSourceConnector
+  tasksMax: 2
+  config:
+    connection.url: "jdbc:postgresql://postgres-kafka.cf8gwg2i2nop.us-east-1.rds.amazonaws.com:5432/postgres" # connection string do banco
+    connection.user: "postgres"
+    connection.password: "mantis0090a"
+    connection.attempts: "3" # tentativas de conexão
+    table.whitelist: "customers"
+    mode: incrementing
+    incrementing.column.name: "id" # Assumindo que há uma coluna 'id' para incremento
+    topic.prefix: "ingest-src-postgresql-" # nome do topico que será enviado os dados
+    poll.interval.ms: 5000
+    tasks.max: "1"
+    
+    key.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter: org.apache.kafka.connect.json.JsonConverter
+    value.converter.schemas.enable: true
+    key.converter.schemas.enable: true

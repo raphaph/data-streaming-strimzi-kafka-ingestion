@@ -1,0 +1,75 @@
+{
+    "schema": {
+        "type": "struct",
+        "fields": [
+            {
+                "type": "int32",
+                "optional": false,
+                "field": "id"
+            },
+            {
+                "type": "string",
+                "optional": true,
+                "field": "nome"
+            },
+            {
+                "type": "string",
+                "optional": true,
+                "field": "sexo"
+            },
+            {
+                "type": "string",
+                "optional": true,
+                "field": "endereco"
+            },
+            {
+                "type": "string",
+                "optional": true,
+                "field": "telefone"
+            },
+            {
+                "type": "string",
+                "optional": true,
+                "field": "email"
+            },
+            {
+                "type": "string",
+                "optional": true,
+                "field": "foto"
+            },
+            {
+                "type": "int32",
+                "optional": true,
+                "name": "org.apache.kafka.connect.data.Date",
+                "version": 1,
+                "field": "nascimento"
+            },
+            {
+                "type": "string",
+                "optional": true,
+                "field": "profissao"
+            },
+            {
+                "type": "int64",
+                "optional": true,
+                "name": "org.apache.kafka.connect.data.Timestamp",
+                "version": 1,
+                "field": "dt_update"
+            }
+        ],
+        "optional": false,
+        "name": "customers"
+    },
+    "payload": {
+        "id": 471,
+        "nome": "Ashley Lawson",
+        "sexo": "M",
+        "endereco": "5974 Sanchez Light Suite 610\nWest Haroldbury, MT 89634",
+        "telefone": "(238)845-5825x4844",
+        "email": "wilsoncaroline@example.com",
+        "foto": "https://dummyimage.com/326x742",
+        "nascimento": -10785,
+        "profissao": "Commissioning editor",
+        "dt_update": 1724088621892
+    }
+}

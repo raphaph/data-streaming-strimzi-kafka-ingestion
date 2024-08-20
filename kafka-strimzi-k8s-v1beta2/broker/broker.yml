@@ -1,0 +1,53 @@
+apiVersion: kafka.strimzi.io/v1beta2 # Define a versão da API do Strimzi Kafka CRD, que é v1beta2, a mais recente.
+kind: Kafka 
+metadata:
+  name: kafkabroker # Nome do recurso Kafka que será criado, usado para identificar o broker.
+  namespace: ingestion # Namespace no Kubernetes onde o Kafka e seus recursos serão implantados.
+spec:
+  kafka:
+    version: 3.6.0 # Versão do Kafka que será implantada.
+    replicas: 1 # Número de brokers Kafka. Idealmente, deve ser igual ou menor ao número de nós disponíveis no cluster Kubernetes.
+    listeners:
+      - name: plain
+        port: 9092 # porta para conexão sem tls ativo do broker com connect por exemplo
+        type: internal
+        tls: false
+      - name: tls
+        port: 9093
+        type: internal 
+        tls: true
+    config:
+      # Configurações do broker Kafka
+      num.partitions: 9 # Define o número padrão de partições que cada novo tópico criado terá.
+      offsets.topic.replication.factor: 1 # Define o fator de replicação para o tópico de offsets, crucial para a confiabilidade dos consumidores Kafka.
+      transaction.state.log.replication.factor: 1 # Fator de replicação para logs de transação, utilizado em transações Kafka.
+      transaction.state.log.min.isr: 1 # Define o número mínimo de réplicas in-sync (ISR) para commits de transações.
+      log.retention.hours: 24 # Define o período de retenção de logs antes de serem excluídos (em horas).
+      message.max.bytes: 500000000
+      replica.fetch.max.bytes: 500000000 
+    storage:
+      type: ephemeral # Define o tipo de armazenamento como efêmero, o que significa que os dados não serão persistidos entre reinicializações.
+      # jbod: cria um disco onde o dado é armazenado conforme ele chega no tópico, não perde o dado em caso de queda
+    resources:
+      # Define as solicitações de recursos e os limites para o broker Kafka.
+      requests:
+        memory: 2Gi # Solicita 2 GiB de memória.
+        cpu: 1 # Solicita 1 CPU.
+      limits:
+        memory: 4Gi # Define o limite máximo de 4 GiB de memória.
+        cpu: 2 # Define o limite máximo de 2 CPUs.
+  zookeeper:
+    replicas: 3 # Número de réplicas do Zookeeper, geralmente deve ser um número ímpar para manter a alta disponibilidade.
+    storage:
+      type: ephemeral # Define o tipo de armazenamento do Zookeeper como efêmero, ou seja, não persistente.
+    resources:
+      # Define as solicitações de recursos e os limites para o Zookeeper.
+      requests:
+        memory: 1Gi # Solicita 1 GiB de memória.
+        cpu: 1 # Solicita 1 CPU.
+      limits:
+        memory: 2Gi # Define o limite máximo de 2 GiB de memória.
+        cpu: 2 # Define o limite máximo de 2 CPUs.
+  entityOperator:
+    topicOperator: {} # Habilita o operador de tópicos, que gerencia tópicos Kafka dentro do cluster.
+    userOperator: {} # Habilita o operador de usuários, que gerencia usuários e ACLs Kafka dentro do cluster.
