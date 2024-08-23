@@ -8,28 +8,39 @@ spec:
   class: io.confluent.connect.s3.S3SinkConnector 
   tasksMax: 2
   config:
+    # Topic config
     topics: ingest-src-postgresql-customers # mesmo nome do topic definido
     topics.dir: "landing-zone/kafka_events"
+    
+    # S3 Config
     s3.bucket.name: "kafka-sink-connector" # criado especificamente para o aprendizado
     s3.region: us-east-1
     aws.access.key.id: "" # inserir sua access key
     aws.secret.access.key: "" # inserir sua secret key
+    
     connector.class: "io.confluent.connect.s3.S3SinkConnector"
     storage.class: "io.confluent.connect.s3.storage.S3Storage"  
     consumer.auto.offset.reset: latest
     format.class: "io.confluent.connect.s3.format.json.JsonFormat" # grava no formato json
     schema.generator.class: "io.confluent.connect.storage.hive.schema.DefaultSchemaGenerator"
+    
     partitioner.class: "io.confluent.connect.storage.partitioner.HourlyPartitioner"
-    storage.class: "io.confluent.connect.s3.storage.S3Storage"
     path.format: "'year'=YYYY/'month'=MM/'day'=dd/'hour'=HH"
     locale: "pt_BR" 
     timezone: "America/Sao_Paulo"
+    
     partition.duration.ms: 4600000
     rotate.schedule.interval.ms: 3600000
     poll.interval.ms: 5000
     flush.size: 10 # numero de messagens acumuladas antes do commit
     rotate.interval.ms: -1
+    
     key.converter: "org.apache.kafka.connect.storage.StringConverter"
     value.converter: "org.apache.kafka.connect.json.JsonConverter"
     key.converter.schemas.enable: false
     value.converter.schemas.enable: false
+
+    #   "time.interval": "DAILY",
+    #    "input.data.format": "AVRO",
+    #     "output.data.format": "PARQUET",
+    # flush.size: 10

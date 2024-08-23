@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
       - name: ksqldb-server
-        image: confluentinc/ksqldb-server:0.12.0
+        image: confluentinc/ksqldb-server:0.12.0 # image official
         ports:
         - containerPort: 8088
         env:
         - name: KSQL_BOOTSTRAP_SERVERS
-          value: PLAINTEXT://igtiedh-kafka-brokers.ingestion.svc.Cluster.local:9092
+          value: PLAINTEXT://kafkabroker-kafka-brokers.ingestion.svc.Cluster.local:9092
         - name: KSQL_LISTENERS
           value: http://0.0.0.0:8088
         - name: KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE

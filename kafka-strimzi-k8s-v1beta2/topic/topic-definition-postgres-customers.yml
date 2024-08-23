@@ -11,4 +11,4 @@ spec:
   config:                            # Configurações específicas do tópico
     retention.ms: 604800000          # Tempo de retenção em milissegundos (1 semana)
     segment.bytes: 1073741824        # Tamanho máximo do segmento (1 GB)
-    cleanup.policy: delete           # Política de limpeza (ex.: 'compact' para compactação)
+    #cleanup.policy: delete           # Política de limpeza (ex.: 'compact' para compactação)

@@ -10,7 +10,7 @@ spec:
   version: 3.6.0
   replicas: 1
   bootstrapServers: kafkabroker-kafka-bootstrap:9092 # porta 9092 com tls desabilitado
-  image: 428189791752.dkr.ecr.us-east-1.amazonaws.com/kafka-k8s-repository:latest
+  image: 428189791752.dkr.ecr.us-east-1.amazonaws.com/kafka-k8s-repo:latest
   # tls:
   #   trustedCertificates:
   #     - secretName: kafkaconnect-cluster-ca-cert
