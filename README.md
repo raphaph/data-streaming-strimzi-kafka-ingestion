@@ -29,6 +29,9 @@ Entre outros...
 ### Execução do projeto ###
 Acesse o tutorial completo com imanges, lembrando que este tutorial é sobre deploy e não conceitos de Kafka.  
 Link: [Data Streaming - Kafka - Postgres to S3](./Data_Streaming_-_Strimzi_Kafka__EKS_-_Ingesto_Postgres_para_AWS_S3.pdf)  
+
+### Arquitetura e conceitos sobre o Strimzi ###  
+Link: [Arquitetura Strimzi Kafka Operator](./Strimzi_Kafka_Operator.pdf)  
   
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
