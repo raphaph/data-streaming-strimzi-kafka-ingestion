@@ -27,7 +27,7 @@ Projeto com todas as depedências e arquivos para build do Kafka utilizando o St
 Entre outros...
 
 ### Execução do projeto ###
-Acesse o tutorial completo com imanges, lembrando que este tutorial é sobre deploy e não conceitos de Kafka.  
+Acesse o tutorial completo com images, lembrando que este tutorial é sobre deploy e não conceitos de Kafka.  
 Link: [Data Streaming - Kafka - Postgres to S3](./Data_Streaming_-_Strimzi_Kafka__EKS_-_Ingesto_Postgres_para_AWS_S3.pdf)  
 
 ### Arquitetura e conceitos sobre o Strimzi ###  
